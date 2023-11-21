@@ -602,7 +602,9 @@ vim.api.nvim_set_keymap('n', '<Leader>wa', ':wa<CR>', { noremap = true, silent =
 require("toggleterm").setup({
   size = 8,
   start_in_insert = true,
-  auto_scroll = true
+  auto_scroll = true,
+  persist_size = true,
+  persist_mode = true
 })
 vim.keymap.set("n", "<leader>to", ':ToggleTerm<CR>')
 -- Terminal mode mappings
