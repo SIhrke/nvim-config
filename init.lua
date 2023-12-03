@@ -262,8 +262,12 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Set the default size of the terminal window to 20 rows and 80 columns
-vim.o.termwinsize = "8x80"
-
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.bo.softtabstop = 4
+vim.bo.cindent = true
+vim.o.scrolloff = 6
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -504,7 +508,7 @@ local servers = {
   clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
@@ -595,18 +599,20 @@ cmp.setup {
 --Own new remappings: nvim-tree
 vim.api.nvim_set_keymap('n', '<leader>o', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeFocus<CR>', { noremap = true, silent = true })
+-- remap for terminal todo
 require('scrollview').setup()
 vim.api.nvim_set_keymap('n', '<Leader>gs', ':ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>wa', ':wa<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>w', ':w<CR>', { noremap = true, silent = true })
 -- Terminal setup.....
 require("toggleterm").setup({
-  size = 8,
+  size = 12,
   start_in_insert = true,
   auto_scroll = true,
   persist_size = true,
   persist_mode = true
 })
-vim.keymap.set("n", "<leader>to", ':ToggleTerm<CR>')
+vim.keymap.set("n", "<leader>to", ':ToggleTerm dir=git_dir<CR>')
 -- Terminal mode mappings
 vim.api.nvim_set_keymap('t', '<A-h>', '<C-\\><C-n><C-w>h', { noremap = true })
 vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n><C-w>', { noremap = true })
