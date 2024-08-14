@@ -44,14 +44,13 @@ require('lazy').setup({
     },
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
-'akinsho/toggleterm.nvim',
   -- Git related plugins   
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-
+  'Civitasv/cmake-tools.nvim',
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -150,16 +149,6 @@ require('lazy').setup({
       },
     },
   },
-
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
-    main = 'ibl',
-    opts = {},
-  },
-
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
@@ -287,7 +276,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-
+ require("cmake-tools").setup({})
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
@@ -473,17 +462,6 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
--- document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-}
-
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require('mason').setup()
@@ -595,33 +573,7 @@ vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeFocus<CR>', { noremap = true
 require('scrollview').setup()
 vim.api.nvim_set_keymap('n', '<Leader>gs', ':ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>wa', ':wa<CR>', { noremap = true, silent = true })
--- Terminal setup.....
-require("toggleterm").setup({
-  size = 8,
-  start_in_insert = true,
-  auto_scroll = true,
-  persist_size = true,
-  persist_mode = true
-})
-vim.keymap.set("n", "<leader>to", ':ToggleTerm<CR>')
--- Terminal mode mappings
-vim.api.nvim_set_keymap('t', '<A-h>', '<C-\\><C-n><C-w>h', { noremap = true })
-vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n><C-w>', { noremap = true })
-vim.api.nvim_set_keymap('t', '<A-j>', '<C-\\><C-n><C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('t', '<A-k>', '<C-\\><C-n><C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('t', '<A-l>', '<C-\\><C-n><C-w>l', { noremap = true })
 
--- Insert mode mappings
-vim.api.nvim_set_keymap('i', '<A-h>', '<C-\\><C-n><C-w>h', { noremap = true })
-vim.api.nvim_set_keymap('i', '<A-j>', '<C-\\><C-n><C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('i', '<A-k>', '<C-\\><C-n><C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('i', '<A-l>', '<C-\\><C-n><C-w>l', { noremap = true })
-
--- Normal mode mappings
-vim.api.nvim_set_keymap('n', '<A-h>', '<C-w>h', { noremap = true })
-vim.api.nvim_set_keymap('n', '<A-j>', '<C-w>j', { noremap = true })
-vim.api.nvim_set_keymap('n', '<A-k>', '<C-w>k', { noremap = true })
-vim.api.nvim_set_keymap('n', '<A-l>', '<C-w>l', { noremap = true })
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
