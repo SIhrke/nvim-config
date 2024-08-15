@@ -36,6 +36,8 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
   -- toggleterm 
   'akinsho/toggleterm.nvim',
+  --debug adapter
+  'mfussenegger/nvim-dap',
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   'Civitasv/cmake-tools.nvim',
@@ -202,3 +204,4 @@ require("plugin_config.luasnip")
 require("plugin_config.toggleterm")
 require("plugin_config.neotest")
 require("plugin_config.cmake")
+require("plugin_config.dap")
