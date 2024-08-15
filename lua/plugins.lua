@@ -2,6 +2,19 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   -- minimap
   'dstein64/nvim-scrollview',
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "alfaix/neotest-gtest"
+    },
+    config = function()
+      -- Configuration will be added here
+    end,
+  },
   --tabs
    {
     'romgrk/barbar.nvim',
@@ -21,7 +34,8 @@ require('lazy').setup({
   -- Git related plugins   
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-
+  -- toggleterm 
+  'akinsho/toggleterm.nvim',
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
   'Civitasv/cmake-tools.nvim',
@@ -185,3 +199,5 @@ require("plugin_config.telescope")
 require("plugin_config.treesitter")
 require("plugin_config.mason")
 require("plugin_config.luasnip")
+require("plugin_config.toggleterm")
+require("plugin_config.neotest")
