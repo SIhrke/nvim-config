@@ -9,7 +9,7 @@ dap.adapters.lldb = {
 
 
 if vim.fn.filereadable('.vscode/nvim_launch.json') == 1 then
-  require('dap.ext.vscode').load_launchjs(nil, { lldb = {'c', 'cpp'} })
+  require('dap.ext.vscode').load_launchjs('.vscode/nvim_launch.json', { lldb = {'c', 'cpp'} })
 else
   dap.configurations.cpp = {} 
 end
