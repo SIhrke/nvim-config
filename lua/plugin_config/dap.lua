@@ -8,8 +8,13 @@ dap.adapters.lldb = {
 }
 
 
-dap.configurations.cpp = {
-  {
+if vim.fn.filereadable('.vscode/nvim_launch.json') == 1 then
+  require('dap.ext.vscode').load_launchjs(nil, { lldb = {'c', 'cpp'} })
+else
+  dap.configurations.cpp = {} 
+end
+
+table.insert(dap.configurations.cpp,{
     name = "Launch file",
     type = "lldb",
     request = "launch",
@@ -18,8 +23,7 @@ dap.configurations.cpp = {
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = true,
-  },
-}
+  });
 
 -- Configure nvim-dap-ui
 local dapui = require("dapui")
