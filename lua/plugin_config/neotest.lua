@@ -11,5 +11,8 @@ require("neotest").setup({
     })
   },
   -- Other neotest configurations
+  log_level=vim.log.levels.DEBUG,
+  output = { enabled=true, open_on_run=true},
+
 })
 

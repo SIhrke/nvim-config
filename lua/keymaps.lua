@@ -11,7 +11,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+--vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- See `:help telescope.builtin`
@@ -37,14 +37,15 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 
 
 --Own new remappings: nvim-tree
-vim.api.nvim_set_keymap('n', '<leader>o', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeFocus<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>o', ':NvimTreeToggle<CR>', { noremap = true, silent = true , desc = "Toggle Explorer" })
+vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeFocus<CR>', { noremap = true, silent = true, desc = "Focus Explorer" } )
 require('scrollview').setup()
-vim.api.nvim_set_keymap('n', '<Leader>gs', ':ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>wa', ':wa<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>gs', ':ClangdSwitchSourceHeader<CR>', { noremap = true, silent = true ,desc = "Switch Header/Source"})
+vim.api.nvim_set_keymap('n', '<Leader>wa', ':wa<CR>', { noremap = true, silent = true, desc = "Write all Buffers" } )
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "<Leader>qq", ':qall<CR>')
 
 --neotest
 vim.keymap.set("n", "<leader>tr", function() require("neotest").run.run() end, { desc = "Run nearest test" })
@@ -55,10 +56,41 @@ vim.keymap.set('n', '<leader>td', function()
 end, {desc = "Debug Nearest Test"})
 
 local dap = require('dap')
--- Set up keymaps
-vim.keymap.set('n', '<Leader>ub', function() dap.continue() end,{ desc = "Deb[u]g [b]egin" })
-vim.keymap.set('n', '<Leader>us', function() dap.step_over() end,{ desc = "Deb[u]g [s]tart" })
-vim.keymap.set('n', '<Leader>ui', function() dap.step_into() end,{ desc = "Deb[u]g [i]nto" })
-vim.keymap.set('n', '<Leader>ur', function() dap.repl.open() end,{ desc = "Deb[u]g [r]eplay" })
-vim.keymap.set('n', '<Leader>ul', function() dap.run_last() end,{ desc = "Deb[u]g [l]ast" })
-vim.keymap.set('n', '<Leader>b', function() dap.toggle_breakpoint() end,{ desc = "Run nearest test" })
+-- DAP debug
+vim.keymap.set('n', '<F5>', function() dap.continue() end,{ desc = "Debug continue" })
+vim.keymap.set('n', '<F10>', function() dap.step_over() end,{ desc = "Debug step over" })
+vim.keymap.set('n', '<F11>', function() dap.step_into() end,{ desc = "Debug step into" })
+vim.keymap.set('n', '<Leader>rr', function() dap.repl.open() end,{ desc = "[r]un [r]eplay" })
+vim.keymap.set('n', '<Leader>rl', function() dap.run_last() end,{ desc = "[r]un [l]ast" })
+vim.keymap.set('n', '<Leader>b', function() dap.toggle_breakpoint() end,{ desc = "Toggle breakpoint" })
+
+-- Build with conan
+vim.keymap.set("n", "<Leader>cbx", ':TermExec cmd="cobx86"<CR>', {desc = "Conan Build x86"})
+vim.keymap.set("n", "<Leader>cix", ':TermExec cmd="coix86"<CR>', {desc = "Conan Install x86"})
+
+vim.keymap.set("n", "<Leader>cba", ':TermExec cmd="cobarm"<CR>', {desc = "Conan Build arm"})
+vim.keymap.set("n", "<Leader>cia", ':TermExec cmd="coiarm"<CR>', {desc = "Conan Install arm"})
+
+-- Terminal - also allows flying through vim windows with alt+hjkl
+vim.keymap.set("n", "<leader>to", ':ToggleTerm<CR>')
+-- Terminal mode mappings
+vim.api.nvim_set_keymap('t', '<A-h>', '<C-\\><C-n><C-w>h', { noremap = true })
+--vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n><C-w>', { noremap = true })
+vim.api.nvim_set_keymap('t', '<A-j>', '<C-\\><C-n><C-w>j', { noremap = true })
+vim.api.nvim_set_keymap('t', '<A-k>', '<C-\\><C-n><C-w>k', { noremap = true })
+vim.api.nvim_set_keymap('t', '<A-l>', '<C-\\><C-n><C-w>l', { noremap = true })
+
+-- Insert mode mappings
+vim.api.nvim_set_keymap('i', '<A-h>', '<C-\\><C-n><C-w>h', { noremap = true })
+vim.api.nvim_set_keymap('i', '<A-j>', '<C-\\><C-n><C-w>j', { noremap = true })
+vim.api.nvim_set_keymap('i', '<A-k>', '<C-\\><C-n><C-w>k', { noremap = true })
+vim.api.nvim_set_keymap('i', '<A-l>', '<C-\\><C-n><C-w>l', { noremap = true })
+
+-- Normal mode mappings
+vim.api.nvim_set_keymap('n', '<A-h>', '<C-w>h', { noremap = true })
+vim.api.nvim_set_keymap('n', '<A-j>', '<C-w>j', { noremap = true })
+vim.api.nvim_set_keymap('n', '<A-k>', '<C-w>k', { noremap = true })
+vim.api.nvim_set_keymap('n', '<A-l>', '<C-w>l', { noremap = true })
+vim.keymap.set('n', '<leader>tp', function()
+  require("neotest").output.open({ enter = true })
+end, { desc = "Open Neotest Output" })

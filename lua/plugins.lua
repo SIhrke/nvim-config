@@ -34,6 +34,16 @@ require('lazy').setup({
   -- Git related plugins   
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+
+  {
+    "kdheepak/lazygit.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { silent = true, noremap = true })
+    end,
+  },
   -- toggleterm 
 'akinsho/toggleterm.nvim',
   --debug adapter
