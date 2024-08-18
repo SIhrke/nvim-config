@@ -45,7 +45,7 @@ require('lazy').setup({
     end,
   },
   -- toggleterm 
-'akinsho/toggleterm.nvim',
+  'akinsho/toggleterm.nvim',
   --debug adapter
   'mfussenegger/nvim-dap',
   'nvim-neotest/nvim-nio',
@@ -184,16 +184,16 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
   {
-  "nvim-tree/nvim-tree.lua",
-  version = "*",
-  lazy = false,
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-  },
-  config = function()
-    require("nvim-tree").setup {}
-  end,
-}
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  }
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
