@@ -67,11 +67,14 @@ vim.keymap.set('n', '<Leader>b', function() dap.toggle_breakpoint() end,{ desc =
 -- Build with conan
 vim.keymap.set("n", "<Leader>cbx", ':TermExec cmd="cobx86"<CR>', {desc = "Conan Build x86"})
 vim.keymap.set("n", "<Leader>cix", ':TermExec cmd="coix86"<CR>', {desc = "Conan Install x86"})
+vim.keymap.set("n", "<Leader>ccx", ':TermExec cmd="cocx86"<CR>', {desc = "Conan Create x86"})
 
 vim.keymap.set("n", "<Leader>cba", ':TermExec cmd="cobarm"<CR>', {desc = "Conan Build arm"})
 vim.keymap.set("n", "<Leader>cia", ':TermExec cmd="coiarm"<CR>', {desc = "Conan Install arm"})
+vim.keymap.set("n", "<Leader>cca", ':TermExec cmd="cocarm"<CR>', {desc = "Conan Create arm"})
 
 -- Terminal - also allows flying through vim windows with alt+hjkl
+-- 
 vim.keymap.set("n", "<leader>to", ':ToggleTerm<CR>')
 -- Terminal mode mappings
 vim.api.nvim_set_keymap('t', '<A-h>', '<C-\\><C-n><C-w>h', { noremap = true })

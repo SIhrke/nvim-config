@@ -3,6 +3,13 @@ require('lazy').setup({
   -- minimap
   'dstein64/nvim-scrollview',
   {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+  },
+  {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/nvim-nio",
@@ -208,7 +215,6 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
 }, {})
-
 require("plugin_config.telescope")
 require("plugin_config.treesitter")
 require("plugin_config.mason")
@@ -217,3 +223,4 @@ require("plugin_config.toggleterm")
 require("plugin_config.neotest")
 require("plugin_config.cmake")
 require("plugin_config.dap")
+require("ibl").setup()
