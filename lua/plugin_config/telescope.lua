@@ -1,7 +1,11 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local ignore_filetypes_list = {
+    "%.ts" 
+}
 require('telescope').setup {
   defaults = {
+    file_ignore_patterns=ignore_filetypes_list,
     mappings = {
       i = {
         ['<C-u>'] = false,
