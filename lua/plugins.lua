@@ -1,5 +1,13 @@
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
+  -- async run for compiling with quickfixlist
+  {
+    'skywind3000/asyncrun.vim',
+    lazy = false,
+    config = function()
+      vim.g.asyncrun_open = 8 -- Set height of quickfix window
+    end    
+  },
   -- minimap
   'dstein64/nvim-scrollview',
   {

@@ -65,13 +65,13 @@ vim.keymap.set('n', '<Leader>rl', function() dap.run_last() end,{ desc = "[r]un 
 vim.keymap.set('n', '<Leader>b', function() dap.toggle_breakpoint() end,{ desc = "Toggle breakpoint" })
 
 -- Build with conan
-vim.keymap.set("n", "<Leader>cbx", ':TermExec cmd="cobx86"<CR>', {desc = "Conan Build x86"})
-vim.keymap.set("n", "<Leader>cix", ':TermExec cmd="coix86"<CR>', {desc = "Conan Install x86"})
-vim.keymap.set("n", "<Leader>ccx", ':TermExec cmd="cocx86"<CR>', {desc = "Conan Create x86"})
+vim.keymap.set("n", "<Leader>cbx", ':AsyncRun cobx86<CR>', {desc = "Conan Build x86"})
+vim.keymap.set("n", "<Leader>cix", ':AsyncRun coix86<CR>', {desc = "Conan Install x86"})
+vim.keymap.set("n", "<Leader>ccx", ':AsyncRun cocx86<CR>', {desc = "Conan Create x86"})
 
-vim.keymap.set("n", "<Leader>cba", ':TermExec cmd="cobarm"<CR>', {desc = "Conan Build arm"})
-vim.keymap.set("n", "<Leader>cia", ':TermExec cmd="coiarm"<CR>', {desc = "Conan Install arm"})
-vim.keymap.set("n", "<Leader>cca", ':TermExec cmd="cocarm"<CR>', {desc = "Conan Create arm"})
+vim.keymap.set("n", "<Leader>cba", ':AsyncRun cobarm<CR>', {desc = "Conan Build arm"})
+vim.keymap.set("n", "<Leader>cia", ':AsyncRun coiarm<CR>', {desc = "Conan Install arm"})
+vim.keymap.set("n", "<Leader>cca", ':AsyncRun cocarm<CR>', {desc = "Conan Create arm"})
 
 -- Terminal - also allows flying through vim windows with alt+hjkl
 -- 
@@ -97,3 +97,34 @@ vim.api.nvim_set_keymap('n', '<A-l>', '<C-w>l', { noremap = true })
 vim.keymap.set('n', '<leader>tp', function()
   require("neotest").output.open({ enter = true })
 end, { desc = "Open Neotest Output" })
+
+
+-- quickfix list
+ -- Function to toggle quickfix window
+local function toggle_quickfix()
+  local qf_exists = false
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win["quickfix"] == 1 then
+      qf_exists = true
+    end
+  end
+  if qf_exists == true then
+    vim.cmd "cclose"
+  else
+    vim.cmd "copen"
+  end
+end
+
+-- Keymaps for quickfix navigation
+vim.keymap.set("n", "<leader>co", toggle_quickfix, { noremap = true, silent = true, desc = "Toggle Quickfix" })
+vim.keymap.set("n", "<leader>cn", ":cnext<CR>", { noremap = true, silent = true, desc = "Quickfix Next" })
+vim.keymap.set("n", "<leader>cp", ":cprev<CR>", { noremap = true, silent = true, desc = "Quickfix Previous" })
+
+-- Keymaps for within quickfix list
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "<C-n>", ":cnext<CR>", { noremap = true, silent = true, buffer = true })
+    vim.keymap.set("n", "<C-p>", ":cprev<CR>", { noremap = true, silent = true, buffer = true })
+  end,
+})
