@@ -10,13 +10,13 @@ require('lazy').setup({
   },
   -- minimap
   'dstein64/nvim-scrollview',
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    ---@module "ibl"
-    ---@type ibl.config
-    opts = {},
-  },
+ {
+   "lukas-reineke/indent-blankline.nvim",
+   main = "ibl",
+   ---@module "ibl"
+   ---@type ibl.config
+   opts = {},
+ },
   {
     "nvim-neotest/neotest",
     dependencies = {
@@ -149,7 +149,10 @@ require('lazy').setup({
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      require("onedark").setup {
+        style = 'deep'
+      }
+      require('onedark').load()
     end,
   },
 
@@ -188,8 +191,20 @@ require('lazy').setup({
         end,
       },
     },
+  },{
+  'nvim-tree/nvim-web-devicons',
+    config = function()
+      require("nvim-web-devicons").setup {
+      override = {
+        qml = {
+          icon = "",
+          color = "#AAFF00",
+          name = "qml"
+        }
+       };
+      }
+    end,
   },
-
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -235,4 +250,5 @@ require("plugin_config.toggleterm")
 require("plugin_config.neotest")
 require("plugin_config.cmake")
 require("plugin_config.dap")
-require("ibl").setup()
+require("plugin_config.ibl")
+

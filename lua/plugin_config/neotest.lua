@@ -10,6 +10,9 @@ require("neotest").setup({
       end
     })
   },
+  summary= {
+      open = "botright vsplit | vertical resize 70"
+  },
   -- Other neotest configurations
   log_level=vim.log.levels.DEBUG,
   output = { enabled=true, open_on_run=true},

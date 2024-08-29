@@ -120,11 +120,3 @@ vim.keymap.set("n", "<leader>co", toggle_quickfix, { noremap = true, silent = tr
 vim.keymap.set("n", "<leader>cn", ":cnext<CR>", { noremap = true, silent = true, desc = "Quickfix Next" })
 vim.keymap.set("n", "<leader>cp", ":cprev<CR>", { noremap = true, silent = true, desc = "Quickfix Previous" })
 
--- Keymaps for within quickfix list
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "qf",
-  callback = function()
-    vim.keymap.set("n", "<C-n>", ":cnext<CR>", { noremap = true, silent = true, buffer = true })
-    vim.keymap.set("n", "<C-p>", ":cprev<CR>", { noremap = true, silent = true, buffer = true })
-  end,
-})
