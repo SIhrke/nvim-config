@@ -66,13 +66,16 @@ vim.keymap.set('n', '<Leader>b', function() dap.toggle_breakpoint() end,{ desc =
 
 -- Build with conan
 vim.keymap.set("n", "<Leader>cbx", ':AsyncRun cobx86<CR>', {desc = "Conan Build x86"})
+vim.keymap.set("n", "<Leader>cbfx", ':AsyncRun cmake --build ./build/x86/Debug<CR>', {desc = "Conan Build Fast x86"})
 vim.keymap.set("n", "<Leader>cix", ':AsyncRun coix86<CR>', {desc = "Conan Install x86"})
 vim.keymap.set("n", "<Leader>ccx", ':AsyncRun cocx86<CR>', {desc = "Conan Create x86"})
 
 vim.keymap.set("n", "<Leader>cba", ':AsyncRun cobarm<CR>', {desc = "Conan Build arm"})
+vim.keymap.set("n", "<Leader>cbfa", ':AsyncRun cmake --build ./build/arm/Debug<CR>', {desc = "Conan Build Fast arm"})
 vim.keymap.set("n", "<Leader>cia", ':AsyncRun coiarm<CR>', {desc = "Conan Install arm"})
 vim.keymap.set("n", "<Leader>cca", ':AsyncRun cocarm<CR>', {desc = "Conan Create arm"})
 
+vim.keymap.set("n", "<leader>cs", ":AsyncStop<CR>", { noremap = true, silent = true, desc = "Stop Async Command" })
 -- Terminal - also allows flying through vim windows with alt+hjkl
 -- 
 vim.keymap.set("n", "<leader>to", ':ToggleTerm<CR>')
@@ -119,4 +122,10 @@ end
 vim.keymap.set("n", "<leader>co", toggle_quickfix, { noremap = true, silent = true, desc = "Toggle Quickfix" })
 vim.keymap.set("n", "<leader>cn", ":cnext<CR>", { noremap = true, silent = true, desc = "Quickfix Next" })
 vim.keymap.set("n", "<leader>cp", ":cprev<CR>", { noremap = true, silent = true, desc = "Quickfix Previous" })
-
+vim.keymap.set("n", "<leader>tc", ":set ignorecase! ignorecase?<CR>", { noremap = true, silent = true, desc = "Toggle Case (Search)" })
+--
+--
+-- Keymaps for buffer navigation
+vim.api.nvim_set_keymap('n', '<C-p>', '<Cmd>BufferPick<CR>', { noremap = true, silent = true , desc= "Buffer Pick"})
+vim.api.nvim_set_keymap('n', '<leader>bca', '<Cmd>BufferCloseAllButCurrent<CR>', { noremap = true, silent = true , desc= "Buffer Close All"})
+vim.api.nvim_set_keymap('n', '<leader>bcf', '<Cmd>BufferClose<CR>', { noremap = true, silent = true , desc= "Buffer Close"})

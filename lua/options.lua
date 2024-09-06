@@ -3,7 +3,8 @@
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
+vim.o.incsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -24,9 +25,7 @@ vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 
--- Case-insensitive searching UNLESS \C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
+vim.o.ignorecase = false
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
@@ -41,4 +40,6 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-
+-- automatic indentation on newline
+vim.o.autoindent = true
+vim.o.smartindent = true
