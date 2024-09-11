@@ -25,7 +25,7 @@ vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 
-vim.o.ignorecase = false
+vim.o.ignorecase = true
 
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
