@@ -133,3 +133,4 @@ vim.api.nvim_set_keymap('n', '<leader>bcf', '<Cmd>BufferClose<CR>', { noremap = 
 vim.keymap.set('n', '<leader>th', function()
     vim.opt.hlsearch = not vim.opt.hlsearch:get()
 end, { noremap = true, silent = true, desc = "Toggle search highlight" })
+vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { noremap = true, silent = true , desc= "Buffer Close"})
